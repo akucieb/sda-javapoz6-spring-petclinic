@@ -8,7 +8,7 @@ import java.util.Set;
 public class Owner {
 
     private Long id;
-    private String firstName;
+    private String firstname;
     private String lastname;
     private Address address;
     private Set<Pet> pets = new HashSet<>();
@@ -23,12 +23,12 @@ public class Owner {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastname() {
