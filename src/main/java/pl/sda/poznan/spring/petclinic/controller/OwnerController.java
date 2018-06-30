@@ -1,13 +1,13 @@
 package pl.sda.poznan.spring.petclinic.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.poznan.spring.petclinic.model.Owner;
 import pl.sda.poznan.spring.petclinic.service.OwnerService;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,7 +23,16 @@ public class OwnerController {
     public ResponseEntity<Owner> getOwnerById(@PathVariable Long id) {
         Owner ownerById = ownerService.findOwnerById(id);
         return ResponseEntity.ok(ownerById);
+    }
 
+    @GetMapping(path = "/owners", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Collection<Owner>> getAllOwners() {
+        return ResponseEntity.ok(ownerService.findAllOwners());
+    }
 
+    @PostMapping(path = "/owner", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Owner> createOwner(@RequestBody Owner owner) {
+        this.ownerService.saveOwner(owner);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

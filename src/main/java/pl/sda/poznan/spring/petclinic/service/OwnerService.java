@@ -14,4 +14,5 @@ public interface OwnerService {
 
     Collection<Owner> findOwnerByLastname(String lastname);
 
+    void saveOwner(Owner owner);
 }
